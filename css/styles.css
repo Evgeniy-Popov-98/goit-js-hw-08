@@ -1,0 +1,19 @@
+.gallery {
+  max-width: 1128px;
+  margin: 24px auto;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+}
+
+.gallery-item {
+  list-style: none;
+}
+
+.gallery-image {
+  width: 360px;
+  height: 200px;
+}
