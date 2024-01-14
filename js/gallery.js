@@ -111,7 +111,6 @@ function openModalImg(event) {
   document.addEventListener("keydown", closeModalImg);
 
   function closeModalImg(e) {
-    console.log(e.code);
     if (e.code === "Escape") {
       instance.close();
       document.removeEventListener("keydown", closeModalImg);
