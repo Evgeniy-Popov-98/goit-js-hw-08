@@ -66,8 +66,6 @@ const images = [
 
 const gallery = document.querySelector(".gallery");
 
-gallery.addEventListener("click", openModalImg);
-
 function imagesTemplate(item) {
   return `<li class="gallery-item">
 			<a class="gallery-link" href=${item.original}>
@@ -92,18 +90,31 @@ function render() {
 
 render();
 
+let isOpenModal = false;
+
+gallery.addEventListener("click", openModalImg);
+
 function openModalImg(event) {
   event.preventDefault();
-  const instance = basicLightbox.create(``);
+
+  if (event.target === event.currentTarget) return;
+
+  const originalImage = event.target.getAttribute("data-source");
+  const altImage = event.target.getAttribute("alt");
+
+  const instance = basicLightbox.create(
+    `<img src="${originalImage}" alt="${altImage}" width="1112" height="640">`
+  );
 
   instance.show();
 
   document.addEventListener("keydown", closeModalImg);
-}
 
-function closeModalImg(e) {
-  if (e.key === "Escape") {
-    instance.close();
-    document.removeEventListener("keydown", closeModalImg);
+  function closeModalImg(e) {
+    console.log(e.code);
+    if (e.code === "Escape") {
+      instance.close();
+      document.removeEventListener("keydown", closeModalImg);
+    }
   }
 }
