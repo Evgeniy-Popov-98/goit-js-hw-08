@@ -66,6 +66,8 @@ const images = [
 
 const gallery = document.querySelector(".gallery");
 
+gallery.addEventListener("click", openModalImg);
+
 function imagesTemplate(item) {
   return `<li class="gallery-item">
 			<a class="gallery-link" href=${item.original}>
@@ -90,16 +92,17 @@ function render() {
 
 render();
 
-const instance = basicLightbox.create(`Hello`);
-function openModalImg() {
+function openModalImg(event) {
+  event.preventDefault();
+  const instance = basicLightbox.create(``);
+
   instance.show();
+
   document.addEventListener("keydown", closeModalImg);
 }
-gallery.addEventListener("click", openModalImg);
 
 function closeModalImg(e) {
-  console.log(e.code);
-  if (e.code === "Escape") {
+  if (e.key === "Escape") {
     instance.close();
     document.removeEventListener("keydown", closeModalImg);
   }
